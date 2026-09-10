@@ -33,7 +33,20 @@ Web de una marca uruguaya de moda femenina (básicos elevados, prendas versátil
 - Nunca subir originales de cámara al repo. Van a `fotos-originales/` y se convierten con `npm run fotos` (WebP, 900×1200, calidad 80).
 - Nombre de archivo = id del producto + número: `body-crema-1.webp`, `body-crema-2.webp`.
 - Las fotos de grillas cargan con `loading="lazy"`; solo la primera foto de la galería del detalle y la portada de la Home cargan de inmediato.
-- CSS plano, un archivo por componente, con clases prefijadas por componente (`.card-foto`, `.home-titulo`) para evitar choques de nombres.
+
+## Seguridad
+
+Reglas que aplican hoy y a todo desarrollo futuro (gestión, usuarios, pagos):
+
+- **Nada secreto en el repo ni en el código del sitio.** Todo lo que está en `src/` y `public/` es público. Claves privadas, tokens y contraseñas van en variables de entorno del servidor (Vercel o Supabase), nunca en un archivo versionado. Si se necesita una clave en el navegador, solo puede ser una clave pensada para ser pública (como la `anon` de Supabase).
+- **Headers de seguridad en `vercel.json`**: CSP estricta (`script-src 'self'`, sin scripts inline ni de terceros), HSTS, `X-Frame-Options: DENY`, `nosniff`, `Referrer-Policy` y `Permissions-Policy`. Al agregar un recurso externo (fuente, imagen, API), sumarlo a la CSP explícitamente. Nunca aflojar `script-src`.
+- **Sin scripts inline** en `index.html` ni en componentes. Vite ya genera todo en `/assets/`. Los estilos inline (`style={{ }}`) están permitidos solo para valores que vienen de datos, como el recorte de fotos.
+- **Links externos** con `target="_blank"` llevan siempre `rel="noreferrer"`.
+- **Dependencias**: correr `npm audit` antes de cada release y mantener Dependabot activo. No agregar paquetes sin revisar qué hacen y quién los mantiene.
+- **Cuando exista base de datos (Supabase)**: RLS activado en todas las tablas y buckets desde el primer día. Lectura pública solo en lo que es público (productos, fotos); escritura solo para usuarios con rol admin. La clave `service_role` jamás sale del servidor.
+- **Cuando existan usuarios**: usar el auth de Supabase, no un login propio. Validar siempre en el servidor o en la base, nunca confiar en lo que manda el navegador.
+- **Cuando existan pagos**: usar un proveedor (Mercado Pago) y nunca tocar datos de tarjeta. Las claves del proveedor viven en una función del lado servidor. Los webhooks se validan con la firma del proveedor.
+- **Cuentas**: 2FA en GitHub y Vercel. `main` protegida: solo entra por PR.
 
 ## Reglas de diseño
 
