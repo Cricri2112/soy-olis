@@ -43,6 +43,8 @@ async function optimizarFoto(archivo) {
 }
 
 async function main() {
+  // Crea las dos carpetas si no existen (fotos-originales/ no se sube a git)
+  await mkdir(CARPETA_ORIGEN, { recursive: true });
   await mkdir(CARPETA_DESTINO, { recursive: true });
   const fotos = await listarFotosOriginales();
 
