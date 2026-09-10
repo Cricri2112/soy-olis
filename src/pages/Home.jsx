@@ -10,11 +10,7 @@ function Home() {
     <main className="home">
       {/* Portada con foto a pantalla completa */}
       <section className="hero">
-        <img
-          src="/productos/chaleco-sastrero-crema-1.webp"
-          alt="Chaleco sastrero crema"
-          className="hero-foto"
-        />
+        <img src="/hero.webp" alt="Chaleco sastrero crema" className="hero-foto" />
         <div className="hero-sombra"></div>
         <div className="hero-texto">
           <div className="hero-eyebrow">Básico · Clásico · Atemporal</div>
@@ -31,6 +27,9 @@ function Home() {
           </div>
         </div>
       </section>
+
+      {/* El resto de la Home va centrado con ancho máximo */}
+      <div className="home-contenido">
 
       {/* Presentación de la marca */}
       <section className="intro">
@@ -75,6 +74,8 @@ function Home() {
         <div>{UBICACION}</div>
         <div>@{INSTAGRAM_USUARIO}</div>
       </footer>
+
+      </div>
     </main>
   );
 }

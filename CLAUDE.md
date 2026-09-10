@@ -24,7 +24,7 @@ Web de una marca uruguaya de moda femenina (básicos elevados, prendas versátil
 - `src/components/`: piezas reutilizables, cada una con su `.jsx` y su `.css` al lado (Header, ProductoCard, FotoPrenda, Galeria, SelectorTalles, DatosProducto, Relacionados, BotonWhatsApp, FiltrosCategoria, ScrollArriba).
 - `src/data/`: solo datos, sin lógica de UI. `productos.js` (catálogo, categorías y funciones para consultarlo) y `contacto.js` (WhatsApp, Instagram y textos fijos de la tienda).
 - `src/utils/`: funciones puras y chicas (`precio.js`, `whatsapp.js`).
-- `public/productos/`: fotos de las prendas en `.webp`, generadas con `npm run fotos` desde `fotos-originales/` (carpeta ignorada por git). `public/logo.svg`: logo de la marca.
+- `public/productos/`: fotos de las prendas en `.webp`, generadas con `npm run fotos` desde `fotos-originales/` (carpeta ignorada por git). `public/logo.svg`: logo de la marca. `public/hero.webp`: foto de portada de la Home (1600 px de ancho).
 - `scripts/`: herramientas de desarrollo que se corren con `npm run`. No forman parte de la web.
 - `design/`: handoff de Claude Design (fuente de verdad de la UI). No es código de la app: no se importa desde `src/` y está excluido del lint. Ver `design/README.md`.
 

@@ -1,15 +1,17 @@
-.home {
+/* La portada ocupa todo el ancho; el resto del contenido se centra a 1200px */
+.home-contenido {
   max-width: 1200px;
   margin: 0 auto;
 }
 
 /* --- Portada --- */
 
+/* Ocupa toda la pantalla. El header va superpuesto encima (ver Header.css). */
 .hero {
   position: relative;
-  height: calc(100dvh - 56px);
+  height: 100vh;
+  height: 100dvh;
   min-height: 560px;
-  max-height: 900px;
   overflow: hidden;
   background: var(--beige-hero);
 }
@@ -23,25 +25,30 @@
   object-position: 50% 30%;
 }
 
+/* En pantallas anchas la foto se recorta arriba y abajo: subimos el
+   encuadre para que la cabeza de la modelo quede visible */
+@media (min-width: 1024px) {
+  .hero-foto {
+    object-position: 50% 12%;
+  }
+}
+
+/* Oscurece un poco la foto para que el texto claro se lea en cualquier zona */
 .hero-sombra {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(39, 39, 39, 0.55) 0%,
-    rgba(39, 39, 39, 0.12) 45%,
-    rgba(39, 39, 39, 0) 70%
-  );
+  background: rgba(0, 0, 0, 0.3);
 }
 
 .hero-texto {
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 0 24px 36px;
+  inset: 0;
+  padding: 56px 24px 24px;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   gap: 22px;
   color: var(--crema-claro);
 }
@@ -58,7 +65,7 @@
   font-size: clamp(38px, 9vw, 64px);
   line-height: 1.02;
   letter-spacing: -0.015em;
-  max-width: 14ch;
+  max-width: 16ch;
 }
 
 .hero-titulo em {
@@ -68,6 +75,7 @@
 
 .hero-botones {
   display: flex;
+  justify-content: center;
   gap: 12px;
   flex-wrap: wrap;
   margin-top: 6px;
@@ -183,10 +191,24 @@
   color: var(--texto);
 }
 
+/* Mismas columnas que el catálogo: 2 en celular, 3 en tablet, 4 en desktop */
 .esencial-grilla {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px 12px;
+}
+
+@media (min-width: 640px) {
+  .esencial-grilla {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .esencial-grilla {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 /* --- Cómo comprar --- */

@@ -14,6 +14,11 @@
   position: relative;
 }
 
+/* En las tarjetas la foto va en formato retrato 2:3 (más alta que en la galería) */
+.card-foto .foto {
+  aspect-ratio: 2 / 3;
+}
+
 .card-etiqueta {
   position: absolute;
   top: 10px;
