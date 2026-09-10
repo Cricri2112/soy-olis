@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+html, body { margin:0; padding:0; background:#DCD3C8; }
+a { color:#272727; } a:hover { color:#4A3528; }
+</style>
+</helmet>
+<div style="min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; gap:16px; padding:24px 20px 32px; box-sizing:border-box; background:#DCD3C8; font-family:'Manrope', Helvetica, Arial, sans-serif; overflow:auto;">
+  <div style="width:{{ boxW }}; height:{{ boxH }}; flex:0 0 auto; position:relative;">
+    <div style="position:absolute; top:0; left:0; transform:scale({{ scale }}); transform-origin:top left; width:402px; height:874px;">
+      <x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" hint-size="402px,874px">
+        <iframe src="Soy Olis.dc.html?framed=1" title="soy Olis — vista mobile" style="width:402px; height:874px; border:none; display:block; background:#EFEAE3;"></iframe>
+      </x-import>
+    </div>
+  </div>
+  <div style="font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:#6F6A64;">Vista mobile · 402 × 874</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { vh: window.innerHeight, vw: window.innerWidth };
+  componentDidMount() {
+    this.onR = () => this.setState({ vh: window.innerHeight, vw: window.innerWidth });
+    window.addEventListener('resize', this.onR);
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this.onR); }
+  renderVals() {
+    const s = Math.min(1, (this.state.vh - 100) / 874, (this.state.vw - 40) / 402);
+    const scale = Math.max(0.35, s);
+    return { scale, boxW: Math.round(402 * scale) + 'px', boxH: Math.round(874 * scale) + 'px' };
+  }
+}
+</script>
+</body>
+</html>

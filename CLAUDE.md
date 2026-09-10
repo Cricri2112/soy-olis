@@ -4,7 +4,7 @@ Web de una marca uruguaya de moda femenina (básicos elevados, prendas versátil
 
 ## Alcance de la versión 1 (cerrado)
 
-- Web **estática**, sin backend: los productos van hardcodeados en un archivo de datos (`src/data/productos.ts` o similar), pensado para reemplazarse fácil por Supabase más adelante.
+- Web **estática**, sin backend: los productos van hardcodeados en `src/data/productos.js`, pensado para reemplazarse fácil por Supabase más adelante.
 - Tres vistas:
   1. **Home**: identidad de marca y acceso al catálogo.
   2. **Catálogo**: grilla de productos con foto, nombre y precio.
@@ -13,9 +13,20 @@ Web de una marca uruguaya de moda femenina (básicos elevados, prendas versátil
 
 ## Stack
 
-- React + Vite.
-- Deploy en Vercel (capa gratuita).
-- Sin librerías adicionales salvo necesidad clara y justificada. Preferir CSS simple (CSS modules o archivo global) antes que frameworks de estilos, salvo que el handoff de diseño indique otra cosa.
+- React + Vite, en **JavaScript** (no TypeScript).
+- `react-router-dom` para las rutas (`/`, `/catalogo`, `/producto/:id`). Es la única librería extra aprobada.
+- Deploy en Vercel (capa gratuita). El proyecto Vite vive en la raíz del repo; `vercel.json` redirige todas las rutas a `index.html` para que el router funcione al recargar.
+- Sin otras librerías adicionales salvo necesidad clara y justificada. Preferir CSS simple (CSS modules o archivo global) antes que frameworks de estilos, salvo que el handoff de diseño indique otra cosa.
+
+## Estructura del código
+
+- `src/pages/`: una vista por archivo (Home, Catalogo, Producto), cada una con su `.jsx` y su `.css`.
+- `src/components/`: piezas reutilizables (Header, ProductoCard, FotoPrenda, ScrollArriba).
+- `src/data/`: `productos.js` (catálogo y categorías) y `contacto.js` (WhatsApp, Instagram y textos fijos de la tienda).
+- `src/utils/`: funciones chicas de ayuda (formateo de precio).
+- `public/productos/`: fotos de las prendas. `public/logo.svg`: logo de la marca.
+- `design/`: handoff de Claude Design (fuente de verdad de la UI). No es código de la app: no se importa desde `src/` y está excluido del lint.
+- CSS plano, un archivo por componente, con clases prefijadas por componente (`.card-foto`, `.home-titulo`) para evitar choques de nombres.
 
 ## Reglas de diseño
 

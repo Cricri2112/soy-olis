@@ -1,0 +1,54 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: var(--texto);
+  min-width: 0;
+}
+
+.card:hover {
+  color: var(--texto);
+}
+
+.card-foto {
+  position: relative;
+}
+
+.card-nuevo {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(239, 234, 227, 0.92);
+  color: var(--texto);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 5px 8px;
+}
+
+.card-texto {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.card-nombre {
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.15;
+  font-weight: 500;
+}
+
+.card-detalle {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--gris);
+}
+
+.card-color {
+  color: var(--gris-muy-claro);
+}
