@@ -1,0 +1,35 @@
+.combina {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-top: 6px;
+}
+
+.combina-titulo {
+  font-weight: 500;
+  font-size: 24px;
+}
+
+.combina-grilla {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.combina-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: var(--texto);
+  min-width: 0;
+}
+
+/* En estas tarjetas chicas el placeholder va sin texto */
+.combina-card .foto-placeholder-texto {
+  display: none;
+}
+
+.combina-nombre {
+  font-size: 12px;
+  line-height: 1.3;
+}
