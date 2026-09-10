@@ -7,6 +7,27 @@
   border-bottom: 1px solid rgba(39, 39, 39, 0.08);
 }
 
+/* Home: transparente y por encima de la portada, con texto claro */
+.header-sobre-foto {
+  position: absolute;
+  left: 0;
+  right: 0;
+  background: transparent;
+  backdrop-filter: none;
+  border-bottom: none;
+}
+
+.header-sobre-foto .header-logo,
+.header-sobre-foto .header-logo-soy,
+.header-sobre-foto .header-catalogo,
+.header-sobre-foto .etiqueta {
+  color: var(--crema-claro);
+}
+
+.header-sobre-foto a:hover {
+  color: #FFFFFF;
+}
+
 .header-contenido {
   max-width: 1200px;
   margin: 0 auto;
