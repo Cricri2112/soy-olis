@@ -1,31 +1,48 @@
-/* Estilos globales. Paleta de neutros de la marca. */
+/* Estilos globales. Los colores salen del handoff de Claude Design. */
 
 :root {
-  --crema: #F5EFE6;
-  --beige: #E8DCCB;
-  --rosa-viejo: #C9A9A6;
-  --chocolate: #3E2C23;
-  --marron: #6B4F3F;
-  --gris: #8A8078;
-  --blanco: #FFFFFF;
-  --negro: #1A1512;
+  --fondo: #EFEAE3;
+  --texto: #272727;
+  --texto-hover: #4A3528;
+  --texto-suave: #5C5750;
+  --gris: #6F6A64;
+  --gris-claro: #8A857F;
+  --gris-muy-claro: #A8A29B;
+  --gris-apagado: #B5AFA8;
+  --beige: #DCD3C8;
+  --beige-hero: #DCCFC4;
+  --crema-claro: #F6F2EC;
+  --rosa-viejo: #C9A3A0;
+  --linea: rgba(39, 39, 39, 0.12);
 
-  --serif: Georgia, 'Times New Roman', serif;
-  --sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Manrope', Helvetica, Arial, sans-serif;
 }
 
 * {
   box-sizing: border-box;
 }
 
+html,
 body {
   margin: 0;
+  padding: 0;
+}
+
+body {
   font-family: var(--sans);
+  font-weight: 400;
   font-size: 16px;
   line-height: 1.5;
-  color: var(--chocolate);
-  background: var(--crema);
+  color: var(--texto);
+  background: var(--fondo);
   -webkit-font-smoothing: antialiased;
+  text-wrap: pretty;
+}
+
+/* El diseño oculta las barras de scroll (por ejemplo en los filtros del catálogo). */
+*::-webkit-scrollbar {
+  display: none;
 }
 
 h1,
@@ -45,12 +62,25 @@ a {
   text-decoration: none;
 }
 
+a:hover {
+  color: var(--texto-hover);
+}
+
 img {
   display: block;
   max-width: 100%;
 }
 
 button {
-  font: inherit;
+  font-family: inherit;
   cursor: pointer;
+}
+
+/* Texto chico en mayúsculas y espaciado, se repite en todo el diseño. */
+.etiqueta {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--gris-claro);
 }

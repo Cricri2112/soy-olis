@@ -1,4 +1,4 @@
-// Formatea un número como precio en pesos uruguayos: 1290 -> "$ 1.290"
+// Formatea un número como precio en pesos uruguayos: 2490 -> "$U 2.490"
 export function formatearPrecio(precio) {
-  return `$ ${precio.toLocaleString('es-UY')}`;
+  return `$U ${precio.toLocaleString('es-UY')}`;
 }
