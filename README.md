@@ -1,16 +1,22 @@
-# React + Vite
+# soy Olis
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Web de catálogo de **soy Olis**, marca uruguaya de moda femenina.
 
-Currently, two official plugins are available:
+Versión 1: catálogo estático (sin backend). Los productos están en `src/data/productos.js`.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Correr el proyecto
 
-## React Compiler
+```bash
+npm install
+npm run dev
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Otros comandos:
 
-## Expanding the Oxlint configuration
+- `npm run build`: genera la versión de producción en `dist/`.
+- `npm run preview`: sirve la carpeta `dist/` para probarla.
+- `npm run lint`: revisa el código con oxlint.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## Stack
+
+React + Vite, JavaScript, CSS plano. Deploy en Vercel.
