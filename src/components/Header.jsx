@@ -6,8 +6,9 @@ function Header() {
   const enHome = pathname === '/';
   const enProducto = pathname.startsWith('/producto/');
 
+  // En la Home el header va superpuesto sobre la foto de portada, sin fondo
   return (
-    <header className="header">
+    <header className={enHome ? 'header header-sobre-foto' : 'header'}>
       <div className="header-contenido">
         {enHome ? (
           <span className="etiqueta">Montevideo · UY</span>
