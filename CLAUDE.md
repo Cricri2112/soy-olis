@@ -20,12 +20,19 @@ Web de una marca uruguaya de moda femenina (básicos elevados, prendas versátil
 
 ## Estructura del código
 
-- `src/pages/`: una vista por archivo (Home, Catalogo, Producto), cada una con su `.jsx` y su `.css`.
-- `src/components/`: piezas reutilizables (Header, ProductoCard, FotoPrenda, ScrollArriba).
-- `src/data/`: `productos.js` (catálogo y categorías) y `contacto.js` (WhatsApp, Instagram y textos fijos de la tienda).
-- `src/utils/`: funciones chicas de ayuda (formateo de precio).
-- `public/productos/`: fotos de las prendas. `public/logo.svg`: logo de la marca.
-- `design/`: handoff de Claude Design (fuente de verdad de la UI). No es código de la app: no se importa desde `src/` y está excluido del lint.
+- `src/pages/`: una vista por archivo (Home, Catalogo, Producto), cada una con su `.jsx` y su `.css`. Una página arma la vista combinando componentes; la lógica de cada pieza vive en el componente.
+- `src/components/`: piezas reutilizables, cada una con su `.jsx` y su `.css` al lado (Header, ProductoCard, FotoPrenda, Galeria, SelectorTalles, DatosProducto, Relacionados, BotonWhatsApp, FiltrosCategoria, ScrollArriba).
+- `src/data/`: solo datos, sin lógica de UI. `productos.js` (catálogo, categorías y funciones para consultarlo) y `contacto.js` (WhatsApp, Instagram y textos fijos de la tienda).
+- `src/utils/`: funciones puras y chicas (`precio.js`, `whatsapp.js`).
+- `public/productos/`: fotos de las prendas en `.webp`, generadas con `npm run fotos` desde `fotos-originales/` (carpeta ignorada por git). `public/logo.svg`: logo de la marca.
+- `scripts/`: herramientas de desarrollo que se corren con `npm run`. No forman parte de la web.
+- `design/`: handoff de Claude Design (fuente de verdad de la UI). No es código de la app: no se importa desde `src/` y está excluido del lint. Ver `design/README.md`.
+
+## Fotos
+
+- Nunca subir originales de cámara al repo. Van a `fotos-originales/` y se convierten con `npm run fotos` (WebP, 900×1200, calidad 80).
+- Nombre de archivo = id del producto + número: `body-crema-1.webp`, `body-crema-2.webp`.
+- Las fotos de grillas cargan con `loading="lazy"`; solo la primera foto de la galería del detalle y la portada de la Home cargan de inmediato.
 - CSS plano, un archivo por componente, con clases prefijadas por componente (`.card-foto`, `.home-titulo`) para evitar choques de nombres.
 
 ## Reglas de diseño
@@ -38,8 +45,13 @@ Web de una marca uruguaya de moda femenina (básicos elevados, prendas versátil
 ## Reglas de código
 
 - **Código simple y legible**: el dueño del repo es estudiante de Analista en TI y quiere poder leer y entender todo el código. Evitar abstracciones innecesarias, patrones avanzados o "magia". Ante la duda, la versión más simple.
-- Componentes chicos y con nombres claros, en español o inglés pero consistentes.
-- Comentar solo lo que no sea obvio leyendo el código.
+- **Un componente por archivo**, con su CSS al lado y el mismo nombre. Si un componente pasa de unas 80 líneas o hace más de una cosa, partirlo.
+- **Cada función hace una sola cosa** y su nombre dice cuál (`filtrarPorCategoria`, `mensajeConsulta`). Sin efectos escondidos.
+- **Datos, lógica y vista separados**: `data/` no sabe de React, `utils/` son funciones puras, los componentes reciben todo por props.
+- Nombres en **español**, descriptivos y consistentes (`producto`, `talle`, `alElegir`). Sin abreviaturas.
+- Clases CSS prefijadas por componente (`.card-foto`, `.talle-agotado`) para que no choquen entre archivos.
+- Comentar solo lo que no sea obvio leyendo el código: el porqué, no el qué.
+- Sin dependencias nuevas en el sitio sin justificarlo antes. Las herramientas de desarrollo (como `sharp` para las fotos) van en `devDependencies`.
 
 ## Verificación obligatoria antes de reportar como terminado
 

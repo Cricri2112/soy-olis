@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import ProductoCard from '../components/ProductoCard.jsx';
 import { productosDestacados } from '../data/productos.js';
-import { INSTAGRAM_USUARIO, UBICACION, linkInstagram, linkWhatsApp } from '../data/contacto.js';
+import { INSTAGRAM_USUARIO, INSTAGRAM_URL, UBICACION } from '../data/contacto.js';
+import { linkWhatsApp } from '../utils/whatsapp.js';
 import './Home.css';
 
 function Home() {
@@ -10,7 +11,7 @@ function Home() {
       {/* Portada con foto a pantalla completa */}
       <section className="hero">
         <img
-          src="/productos/chaleco-sastrero-crema.jpg"
+          src="/productos/chaleco-sastrero-crema-1.webp"
           alt="Chaleco sastrero crema"
           className="hero-foto"
         />
@@ -24,7 +25,7 @@ function Home() {
           </h1>
           <div className="hero-botones">
             <Link to="/catalogo" className="hero-boton">Ver catálogo</Link>
-            <a href={linkInstagram} target="_blank" rel="noreferrer" className="hero-boton-borde">
+            <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" className="hero-boton-borde">
               @{INSTAGRAM_USUARIO}
             </a>
           </div>

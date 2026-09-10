@@ -4,7 +4,7 @@ import { formatearPrecio } from '../utils/precio.js';
 import './ProductoCard.css';
 
 // Tarjeta de un producto en una grilla.
-// conEtiquetas: en el catálogo se muestran además la marca "Nuevo" y el color.
+// conEtiquetas: en el catálogo se muestran además "Nuevo" / "Sin stock" y el color.
 function ProductoCard({ producto, conEtiquetas = false }) {
   return (
     <Link to={`/producto/${producto.id}`} className="card">
@@ -15,7 +15,7 @@ function ProductoCard({ producto, conEtiquetas = false }) {
           etiqueta={producto.nombre}
           zoomAlPasar
         />
-        {conEtiquetas && producto.nuevo && <span className="card-nuevo">Nuevo</span>}
+        {conEtiquetas && <EtiquetaCard producto={producto} />}
       </div>
       <div className="card-texto">
         <div className="card-nombre">{producto.nombre}</div>
@@ -26,6 +26,13 @@ function ProductoCard({ producto, conEtiquetas = false }) {
       </div>
     </Link>
   );
+}
+
+// Etiqueta chica sobre la foto. "Sin stock" tiene prioridad sobre "Nuevo".
+function EtiquetaCard({ producto }) {
+  if (!producto.disponible) return <span className="card-etiqueta">Sin stock</span>;
+  if (producto.nuevo) return <span className="card-etiqueta">Nuevo</span>;
+  return null;
 }
 
 export default ProductoCard;

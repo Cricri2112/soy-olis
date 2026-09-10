@@ -1,0 +1,22 @@
+.datos {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--linea);
+}
+
+.datos-fila {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--linea);
+  font-size: 13px;
+}
+
+.datos-nombre {
+  color: var(--gris-claro);
+}
+
+.datos-valor {
+  text-align: right;
+}
