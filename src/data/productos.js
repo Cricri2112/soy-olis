@@ -5,11 +5,14 @@
 // - id: texto único, se usa en la URL (/producto/:id)
 // - nombre, categoria, color, descripcion, material
 // - precio: número en pesos uruguayos
-// - fotos: rutas a imágenes dentro de /public. Lista vacía = todavía sin foto.
+// - fotos: rutas a imágenes dentro de /public/productos (se generan con `npm run fotos`).
+//   Lista vacía = todavía sin foto. La primera es la que se ve en la grilla.
 // - posicionFoto: qué parte de la foto se prioriza al recortarla (object-position)
 // - talles: talles que existen para la prenda
 // - agotados: talles que hoy no hay en stock (se muestran tachados)
 // - nuevo: true muestra la etiqueta "Nuevo" en el catálogo
+// - disponible: false cuando la prenda no está en stock en ningún talle.
+//   Se sigue mostrando en el catálogo, pero sin selector de talle.
 
 export const categorias = ['Todo', 'Bodys', 'Pantalones', 'Blazers', 'Chalecos', 'Abrigos'];
 
@@ -20,11 +23,12 @@ const productos = [
     categoria: 'Chalecos',
     color: 'Blanco',
     precio: 2490,
-    fotos: ['/productos/chaleco-lino-blanco.jpg'],
+    fotos: ['/productos/chaleco-lino-blanco-1.webp'],
     posicionFoto: '50% 20%',
     talles: ['S', 'M', 'L', 'XL'],
     agotados: ['XL'],
     nuevo: true,
+    disponible: true,
     material: 'Lino y viscosa',
     descripcion:
       'Chaleco sastrero corto en lino, con botones forrados y pinzas que marcan la cintura. Se usa solo o sobre un body: funciona igual con el short haciendo juego que con un pantalón sastrero.',
@@ -35,11 +39,12 @@ const productos = [
     categoria: 'Chalecos',
     color: 'Crema',
     precio: 2690,
-    fotos: ['/productos/chaleco-sastrero-crema.jpg'],
+    fotos: ['/productos/chaleco-sastrero-crema-1.webp'],
     posicionFoto: '50% 35%',
     talles: ['S', 'M', 'L', 'XL'],
     agotados: [],
     nuevo: true,
+    disponible: true,
     material: 'Gabardina de tacto seda',
     descripcion:
       'Escote en V profundo y largo a la cadera. La gabardina cae pesada y no se arruga, ideal para llevar de la oficina a la noche sin cambiarse.',
@@ -50,11 +55,12 @@ const productos = [
     categoria: 'Chalecos',
     color: 'Celeste',
     precio: 4890,
-    fotos: ['/productos/conjunto-celeste.jpg'],
+    fotos: ['/productos/conjunto-celeste-1.webp'],
     posicionFoto: '50% 40%',
     talles: ['S', 'M', 'L'],
     agotados: ['S'],
     nuevo: false,
+    disponible: true,
     material: 'Gabardina de tacto seda',
     descripcion:
       'Chaleco y short de tiro alto con botones forrados. Cada pieza se vende también por separado: el short combina con cualquier body de la colección.',
@@ -65,11 +71,12 @@ const productos = [
     categoria: 'Chalecos',
     color: 'Rosa',
     precio: 4890,
-    fotos: ['/productos/conjunto-rosa.jpg'],
+    fotos: ['/productos/conjunto-rosa-1.webp'],
     posicionFoto: '50% 45%',
     talles: ['S', 'M', 'L', 'XL'],
     agotados: [],
     nuevo: false,
+    disponible: true,
     material: 'Gabardina de tacto seda',
     descripcion:
       'Top con un solo botón y falda-short cruzada. Un conjunto liviano para el día, que de noche se transforma con el blazer negro.',
@@ -85,6 +92,7 @@ const productos = [
     talles: ['S', 'M', 'L', 'XL'],
     agotados: [],
     nuevo: false,
+    disponible: true,
     material: 'Algodón con elastano',
     descripcion:
       'Cuello halter y espalda cerrada. La base de casi todos los looks: va debajo del chaleco, del blazer o solo con el pantalón sastrero.',
@@ -100,6 +108,7 @@ const productos = [
     talles: ['S', 'M', 'L', 'XL'],
     agotados: ['S'],
     nuevo: false,
+    disponible: true,
     material: 'Algodón con elastano',
     descripcion: 'La misma horma que el chocolate, en crema. Tela con cuerpo, sin transparencias.',
   },
@@ -114,6 +123,7 @@ const productos = [
     talles: ['S', 'M', 'L', 'XL'],
     agotados: [],
     nuevo: false,
+    disponible: true,
     material: 'Sastrero con caída',
     descripcion:
       'Tiro alto, pierna recta amplia y bolsillos laterales. Largo pensado para usar con zapato plano o taco bajo.',
@@ -129,6 +139,7 @@ const productos = [
     talles: ['S', 'M', 'L', 'XL'],
     agotados: [],
     nuevo: false,
+    disponible: true,
     material: 'Sastrero con caída',
     descripcion: 'El básico que resuelve todo. Misma horma que el camel.',
   },
@@ -143,6 +154,7 @@ const productos = [
     talles: ['S', 'M', 'L'],
     agotados: [],
     nuevo: false,
+    disponible: true,
     material: 'Sastrero con forrería',
     descripcion: 'Corte recto, un botón, hombro marcado apenas. Levanta cualquier prenda de la colección.',
   },
@@ -157,6 +169,7 @@ const productos = [
     talles: ['S', 'M', 'L', 'XL'],
     agotados: ['M'],
     nuevo: false,
+    disponible: true,
     material: 'Sastrero con forrería',
     descripcion: 'Versión clara del blazer negro. Combina con todos los tonos neutros de la colección.',
   },
@@ -171,6 +184,7 @@ const productos = [
     talles: ['S', 'M', 'L'],
     agotados: [],
     nuevo: false,
+    disponible: true,
     material: 'Paño de lana',
     descripcion: 'Largo a la rodilla, cruzado, sin solapa. Cierra el look de invierno sobre todo lo demás.',
   },
@@ -185,6 +199,7 @@ const productos = [
     talles: ['S', 'M', 'L'],
     agotados: ['L'],
     nuevo: false,
+    disponible: true,
     material: 'Paño de lana',
     descripcion: 'El mismo abrigo, en chocolate. Con el body crema y el pantalón camel arma el uniforme de invierno.',
   },

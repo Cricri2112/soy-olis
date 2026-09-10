@@ -1,38 +1,23 @@
 import { useState } from 'react';
 import productos, { categorias } from '../data/productos.js';
 import ProductoCard from '../components/ProductoCard.jsx';
+import FiltrosCategoria from '../components/FiltrosCategoria.jsx';
 import './Catalogo.css';
 
 function Catalogo() {
   // Categoría elegida en los filtros. "Todo" muestra todos los productos.
   const [filtro, setFiltro] = useState('Todo');
 
-  const filtrados =
-    filtro === 'Todo' ? productos : productos.filter((producto) => producto.categoria === filtro);
-
-  const cantidad = filtrados.length;
+  const filtrados = filtrarPorCategoria(productos, filtro);
 
   return (
     <main className="catalogo">
       <div className="catalogo-encabezado">
         <h1 className="catalogo-titulo">Catálogo</h1>
-        <div className="catalogo-cantidad">
-          {cantidad} {cantidad === 1 ? 'prenda' : 'prendas'}
-        </div>
+        <div className="catalogo-cantidad">{textoCantidad(filtrados.length)}</div>
       </div>
 
-      <div className="catalogo-filtros">
-        {categorias.map((categoria) => (
-          <button
-            key={categoria}
-            type="button"
-            onClick={() => setFiltro(categoria)}
-            className={categoria === filtro ? 'filtro filtro-activo' : 'filtro'}
-          >
-            {categoria}
-          </button>
-        ))}
-      </div>
+      <FiltrosCategoria categorias={categorias} activa={filtro} alElegir={setFiltro} />
 
       <div className="catalogo-grilla">
         {filtrados.map((producto) => (
@@ -41,6 +26,15 @@ function Catalogo() {
       </div>
     </main>
   );
+}
+
+function filtrarPorCategoria(lista, categoria) {
+  if (categoria === 'Todo') return lista;
+  return lista.filter((producto) => producto.categoria === categoria);
+}
+
+function textoCantidad(cantidad) {
+  return `${cantidad} ${cantidad === 1 ? 'prenda' : 'prendas'}`;
 }
 
 export default Catalogo;

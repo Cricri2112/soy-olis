@@ -1,0 +1,33 @@
+.galeria {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.galeria-fotos {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+}
+
+.galeria-foto {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+}
+
+.galeria-puntos {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  padding: 2px 0 6px;
+}
+
+.galeria-punto {
+  width: 22px;
+  height: 2px;
+  background: rgba(39, 39, 39, 0.2);
+}
+
+.galeria-punto-activo {
+  background: var(--texto);
+}

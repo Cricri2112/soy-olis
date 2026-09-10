@@ -1,0 +1,48 @@
+.talles {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.talles-encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.talles-ayuda {
+  font-size: 12px;
+  color: var(--gris-claro);
+}
+
+.talles-lista {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.talle {
+  min-width: 52px;
+  height: 44px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(39, 39, 39, 0.35);
+  background: transparent;
+  color: var(--texto);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  font-weight: 500;
+}
+
+.talle-agotado {
+  border-color: var(--linea);
+  color: var(--gris-apagado);
+  text-decoration: line-through;
+  cursor: default;
+}
+
+.talle-elegido {
+  background: var(--texto);
+  border-color: var(--texto);
+  color: var(--fondo);
+}

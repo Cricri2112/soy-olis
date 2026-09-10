@@ -23,35 +23,6 @@
   color: var(--gris-claro);
 }
 
-/* Fila de filtros que se desplaza horizontalmente en móvil */
-.catalogo-filtros {
-  display: flex;
-  gap: 8px;
-  overflow-x: auto;
-  padding: 14px 20px 18px;
-  scroll-snap-type: x proximity;
-}
-
-.filtro {
-  flex: 0 0 auto;
-  height: 36px;
-  padding: 0 16px;
-  border-radius: 999px;
-  border: 1px solid rgba(39, 39, 39, 0.25);
-  background: transparent;
-  color: var(--texto);
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  font-weight: 500;
-  white-space: nowrap;
-}
-
-.filtro-activo {
-  background: var(--texto);
-  color: var(--fondo);
-  border-color: var(--texto);
-}
-
 .catalogo-grilla {
   padding: 0 20px;
   display: grid;
