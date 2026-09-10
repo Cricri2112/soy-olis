@@ -1,106 +1,255 @@
 .producto {
-  padding: 16px 20px 48px;
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
+  padding-bottom: 110px;
+  display: grid;
+  /* En móvil una columna; en desktop, fotos a la izquierda e info a la derecha */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
+  gap: 0 40px;
+  align-items: start;
 }
 
 .producto-no-encontrado {
   text-align: center;
-  padding-top: 80px;
+  padding: 80px 24px;
 }
 
-.producto-volver {
+.producto-no-encontrado-link {
   display: inline-block;
-  font-size: 13px;
-  letter-spacing: 1px;
+  margin-top: 16px;
+  font-size: 12px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--gris);
-  margin-bottom: 16px;
+  border-bottom: 1px solid var(--rosa-viejo);
 }
 
-.producto-fotos {
+/* --- Galería --- */
+
+.galeria {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.galeria-fotos {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+}
+
+.galeria-foto {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+}
+
+.galeria-puntos {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  padding: 2px 0 6px;
+}
+
+.galeria-punto {
+  width: 22px;
+  height: 2px;
+  background: rgba(39, 39, 39, 0.2);
+}
+
+.galeria-punto-activo {
+  background: var(--texto);
+}
+
+/* --- Información --- */
+
+.info {
+  padding: 8px 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.info-encabezado {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.producto-foto {
-  width: 100%;
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
-  background: var(--beige);
+.info-nombre {
+  font-size: 36px;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
 }
 
-.producto-info {
-  margin-top: 20px;
+.info-precio {
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
 }
 
-.producto-nombre {
-  font-size: 26px;
+.info-descripcion {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--texto-suave);
 }
 
-.producto-precio {
-  font-size: 18px;
-  margin-top: 6px;
+/* --- Talles --- */
+
+.talles {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.producto-descripcion {
-  color: var(--marron);
-  margin-top: 16px;
+.talles-encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
 }
 
-.producto-talles-titulo {
+.talles-ayuda {
   font-size: 12px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--gris);
-  margin-top: 24px;
+  color: var(--gris-claro);
 }
 
-.producto-talles {
-  list-style: none;
-  padding: 0;
-  margin: 8px 0 0;
+.talles-lista {
   display: flex;
   gap: 8px;
+  flex-wrap: wrap;
 }
 
-.producto-talle {
-  min-width: 44px;
-  padding: 8px 12px;
-  border: 1px solid var(--chocolate);
-  text-align: center;
-  font-size: 14px;
+.talle {
+  min-width: 52px;
+  height: 44px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(39, 39, 39, 0.35);
+  background: transparent;
+  color: var(--texto);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  font-weight: 500;
 }
 
-.producto-whatsapp {
-  display: block;
-  margin-top: 32px;
-  padding: 16px;
-  background: var(--chocolate);
-  color: var(--crema);
-  text-align: center;
-  font-size: 14px;
-  letter-spacing: 1.5px;
+.talle-agotado {
+  border-color: var(--linea);
+  color: var(--gris-apagado);
+  text-decoration: line-through;
+  cursor: default;
+}
+
+.talle-elegido {
+  background: var(--texto);
+  border-color: var(--texto);
+  color: var(--fondo);
+}
+
+/* --- Datos (material, entrega, cambios) --- */
+
+.datos {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--linea);
+}
+
+.datos-fila {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--linea);
+  font-size: 13px;
+}
+
+.datos-nombre {
+  color: var(--gris-claro);
+}
+
+.datos-valor {
+  text-align: right;
+}
+
+/* --- Combiná con --- */
+
+.combina {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-top: 6px;
+}
+
+.combina-titulo {
+  font-weight: 500;
+  font-size: 24px;
+}
+
+.combina-grilla {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.combina-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: var(--texto);
+  min-width: 0;
+}
+
+.combina-card .foto-placeholder-texto {
+  display: none;
+}
+
+.combina-nombre {
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+/* --- Botón fijo de WhatsApp --- */
+
+.cta {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 30;
+  padding: 12px 20px 20px;
+  background: linear-gradient(to top, var(--fondo) 70%, rgba(239, 234, 227, 0));
+}
+
+.cta-contenido {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cta-boton {
+  width: 100%;
+  max-width: 520px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: var(--texto);
+  color: var(--fondo);
+  border-radius: 999px;
+  font-size: 13px;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgba(39, 39, 39, 0.18);
 }
 
-/* Desktop: fotos a la izquierda, info a la derecha */
-@media (min-width: 768px) {
-  .producto {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    align-items: start;
-  }
+.cta-boton:hover {
+  background: var(--texto-hover);
+  color: var(--fondo);
+}
 
-  .producto-volver {
-    grid-column: 1 / -1;
-  }
-
-  .producto-info {
-    margin-top: 0;
-    position: sticky;
-    top: 24px;
-  }
+.cta-punto {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--rosa-viejo);
 }

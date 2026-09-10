@@ -1,30 +1,60 @@
 .catalogo {
-  padding: 24px 20px 48px;
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
+  padding-bottom: 64px;
+}
+
+.catalogo-encabezado {
+  padding: 32px 20px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .catalogo-titulo {
-  font-size: 28px;
-  margin-bottom: 20px;
+  font-size: 40px;
+  line-height: 1;
+  letter-spacing: -0.015em;
 }
 
-/* Mobile: 2 columnas. En pantallas más anchas, 3 y 4. */
+.catalogo-cantidad {
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--gris-claro);
+}
+
+/* Fila de filtros que se desplaza horizontalmente en móvil */
+.catalogo-filtros {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 14px 20px 18px;
+  scroll-snap-type: x proximity;
+}
+
+.filtro {
+  flex: 0 0 auto;
+  height: 36px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(39, 39, 39, 0.25);
+  background: transparent;
+  color: var(--texto);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.filtro-activo {
+  background: var(--texto);
+  color: var(--fondo);
+  border-color: var(--texto);
+}
+
 .catalogo-grilla {
+  padding: 0 20px;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px 12px;
-}
-
-@media (min-width: 640px) {
-  .catalogo-grilla {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 28px 20px;
-  }
-}
-
-@media (min-width: 960px) {
-  .catalogo-grilla {
-    grid-template-columns: repeat(4, 1fr);
-  }
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 24px 12px;
 }
