@@ -20,11 +20,12 @@ Web de una marca uruguaya de moda femenina (básicos elevados, prendas versátil
 
 ## Estructura del código
 
-- `src/pages/`: una carpeta por vista (Home, Catalogo, Producto), cada una con su `.jsx` y su `.css`.
-- `src/components/`: piezas reutilizables (Header, ProductoCard).
-- `src/data/`: `productos.js` (catálogo) y `contacto.js` (número de WhatsApp e Instagram).
+- `src/pages/`: una vista por archivo (Home, Catalogo, Producto), cada una con su `.jsx` y su `.css`.
+- `src/components/`: piezas reutilizables (Header, ProductoCard, FotoPrenda, ScrollArriba).
+- `src/data/`: `productos.js` (catálogo y categorías) y `contacto.js` (WhatsApp, Instagram y textos fijos de la tienda).
 - `src/utils/`: funciones chicas de ayuda (formateo de precio).
-- `public/productos/`: fotos de las prendas.
+- `public/productos/`: fotos de las prendas. `public/logo.svg`: logo de la marca.
+- `design/`: handoff de Claude Design (fuente de verdad de la UI). No es código de la app: no se importa desde `src/` y está excluido del lint.
 - CSS plano, un archivo por componente, con clases prefijadas por componente (`.card-foto`, `.home-titulo`) para evitar choques de nombres.
 
 ## Reglas de diseño
