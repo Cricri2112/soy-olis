@@ -1,23 +1,19 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Header from './components/Header.jsx';
+import Home from './pages/Home.jsx';
+import Catalogo from './pages/Catalogo.jsx';
+import Producto from './pages/Producto.jsx';
+
 function App() {
   return (
-    <main style={{
-      minHeight: '100dvh',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: '#F5EFE6',
-      color: '#3E2C23',
-      fontFamily: 'Georgia, serif',
-      textAlign: 'center',
-      padding: '2rem'
-    }}>
-      <h1 style={{ fontSize: '3rem', margin: 0 }}>soy Olis</h1>
-      <p style={{ letterSpacing: '2px', textTransform: 'uppercase', fontSize: '0.8rem' }}>
-        Básico, clásico y atemporal
-      </p>
-      <p>Muy pronto — mientras tanto, encontranos en Instagram @soyolis.uy</p>
-    </main>
+    <BrowserRouter>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/catalogo" element={<Catalogo />} />
+        <Route path="/producto/:id" element={<Producto />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

@@ -1,0 +1,21 @@
+.card {
+  display: block;
+}
+
+.card-foto {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  background: var(--beige);
+}
+
+.card-nombre {
+  font-size: 15px;
+  margin-top: 10px;
+}
+
+.card-precio {
+  font-size: 14px;
+  color: var(--gris);
+  margin-top: 2px;
+}

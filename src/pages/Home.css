@@ -1,0 +1,44 @@
+.home {
+  min-height: calc(100dvh - 60px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 40px 24px;
+}
+
+.home-titulo {
+  font-size: 48px;
+}
+
+.home-lema {
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gris);
+  margin-top: 8px;
+}
+
+.home-texto {
+  max-width: 320px;
+  margin-top: 24px;
+  color: var(--marron);
+}
+
+.home-boton {
+  display: inline-block;
+  margin-top: 32px;
+  padding: 14px 32px;
+  background: var(--chocolate);
+  color: var(--crema);
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.home-instagram {
+  margin-top: 24px;
+  font-size: 14px;
+  color: var(--gris);
+}

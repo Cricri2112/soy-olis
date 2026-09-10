@@ -1,0 +1,106 @@
+.producto {
+  padding: 16px 20px 48px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.producto-no-encontrado {
+  text-align: center;
+  padding-top: 80px;
+}
+
+.producto-volver {
+  display: inline-block;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--gris);
+  margin-bottom: 16px;
+}
+
+.producto-fotos {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.producto-foto {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  background: var(--beige);
+}
+
+.producto-info {
+  margin-top: 20px;
+}
+
+.producto-nombre {
+  font-size: 26px;
+}
+
+.producto-precio {
+  font-size: 18px;
+  margin-top: 6px;
+}
+
+.producto-descripcion {
+  color: var(--marron);
+  margin-top: 16px;
+}
+
+.producto-talles-titulo {
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gris);
+  margin-top: 24px;
+}
+
+.producto-talles {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0;
+  display: flex;
+  gap: 8px;
+}
+
+.producto-talle {
+  min-width: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--chocolate);
+  text-align: center;
+  font-size: 14px;
+}
+
+.producto-whatsapp {
+  display: block;
+  margin-top: 32px;
+  padding: 16px;
+  background: var(--chocolate);
+  color: var(--crema);
+  text-align: center;
+  font-size: 14px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+/* Desktop: fotos a la izquierda, info a la derecha */
+@media (min-width: 768px) {
+  .producto {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+
+  .producto-volver {
+    grid-column: 1 / -1;
+  }
+
+  .producto-info {
+    margin-top: 0;
+    position: sticky;
+    top: 24px;
+  }
+}
