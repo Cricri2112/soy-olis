@@ -1,0 +1,18 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--beige);
+}
+
+.header-logo {
+  font-family: var(--serif);
+  font-size: 22px;
+}
+
+.header-link {
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
