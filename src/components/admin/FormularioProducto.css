@@ -27,7 +27,7 @@
 .campo-ayuda {
   font-size: 12px;
   color: var(--gris-claro);
-  word-break: break-all;
+  overflow-wrap: anywhere; /* corta un slug muy largo, pero las frases normales cortan por espacio */
 }
 
 /* Sección plegable con lo opcional */

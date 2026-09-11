@@ -6,7 +6,7 @@ import { ordenarTalles } from '../utils/catalogo.js';
 // Cada función devuelve productos ya "normalizados" con la forma que usa la UI.
 
 // Columnas que traemos siempre: el producto más sus tablas relacionadas.
-const COLUMNAS = '*, producto_talles(talle), fotos(ruta, orden)';
+const COLUMNAS = '*, producto_talles(talle), fotos(id, ruta, orden)';
 
 // Productos visibles al público, del más nuevo al más viejo.
 export async function listarProductosVisibles() {
@@ -89,6 +89,16 @@ export async function slugDisponible(slugBase, idActual = null) {
   return candidato;
 }
 
+// Si ya hay otro producto con ese nombre (sin distinguir mayúsculas).
+// Sirve para avisar en el formulario, no bloquea.
+export async function existeProductoConNombre(nombre, idActual = null) {
+  let consulta = supabase.from('productos').select('id').ilike('nombre', nombre.trim());
+  if (idActual) consulta = consulta.neq('id', idActual);
+  const { data, error } = await consulta;
+  if (error) throw error;
+  return data.length > 0;
+}
+
 async function existeSlug(slug, idActual) {
   let consulta = supabase.from('productos').select('id').eq('slug', slug);
   if (idActual) consulta = consulta.neq('id', idActual);
@@ -99,7 +109,7 @@ async function existeSlug(slug, idActual) {
 
 // Pasa una fila de la base a la forma que usan los componentes.
 // - talles: lista de textos ordenada (XS, S, M...)
-// - fotos: lista de URLs públicas, según el campo `orden`
+// - fotos: lista de { id, ruta, url } según el campo `orden`. `url` es la pública para el <img>.
 function normalizarProducto(fila) {
   const fotosOrdenadas = [...fila.fotos].sort((a, b) => a.orden - b.orden);
 
@@ -114,6 +124,6 @@ function normalizarProducto(fila) {
     destacado: fila.destacado,
     creadoEn: fila.creado_en,
     talles: ordenarTalles(fila.producto_talles.map((t) => t.talle)),
-    fotos: fotosOrdenadas.map((foto) => urlPublica(foto.ruta)),
+    fotos: fotosOrdenadas.map((foto) => ({ id: foto.id, ruta: foto.ruta, url: urlPublica(foto.ruta) })),
   };
 }

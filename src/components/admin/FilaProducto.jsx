@@ -19,7 +19,7 @@ function FilaProducto({ producto, alAlternarVisible }) {
     <li className={producto.visible ? 'fila' : 'fila fila-oculta'}>
       {/* Tocar la foto o el texto abre la edición */}
       <Link to={`/admin/${producto.id}`} className="fila-foto">
-        <FotoPrenda foto={producto.fotos[0]} etiqueta={producto.nombre} />
+        <FotoPrenda foto={producto.fotos[0]?.url} etiqueta={producto.nombre} />
       </Link>
 
       <Link to={`/admin/${producto.id}`} className="fila-texto">

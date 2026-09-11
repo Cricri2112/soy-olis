@@ -39,7 +39,7 @@ function FichaProducto({ producto, relacionados }) {
 
   return (
     <main className="producto">
-      <Galeria fotos={producto.fotos} nombre={producto.nombre} />
+      <Galeria fotos={producto.fotos.map((foto) => foto.url)} nombre={producto.nombre} />
 
       <div className="info">
         <div className="info-encabezado">

@@ -1,14 +1,17 @@
 import { useState } from 'react';
 import SelectorTallesAdmin from './SelectorTallesAdmin.jsx';
+import FotosAdmin from './FotosAdmin.jsx';
 import { generarSlug } from '../../utils/slug.js';
+import { existeProductoConNombre } from '../../data/productosApi.js';
 import './FormularioProducto.css';
 
-// Formulario de alta y edición. Lo obligatorio va arriba: nombre, precio y talles.
+// Formulario de alta y edición. Lo obligatorio va arriba: fotos, nombre, precio y talles.
 // Lo opcional (descripción, categoría, destacado, slug) queda plegado en "Más opciones".
 // - inicial: producto a editar, o undefined para uno nuevo
-// - alGuardar: recibe { datos, talles } y guarda en la base; si falla, lanza error
+// - alGuardar: recibe { datos, talles, fotos, fotosBorradas } y guarda; si falla, lanza error
 // - textoBoton: "Publicar" o "Guardar cambios"
 function FormularioProducto({ inicial, alGuardar, textoBoton }) {
+  const [fotos, setFotos] = useState(inicial?.fotos ?? []);
   const [nombre, setNombre] = useState(inicial?.nombre ?? '');
   const [precio, setPrecio] = useState(inicial ? String(inicial.precio) : '');
   const [talles, setTalles] = useState(inicial?.talles ?? []);
@@ -19,11 +22,22 @@ function FormularioProducto({ inicial, alGuardar, textoBoton }) {
   // Mientras no toquen el slug a mano, se arma solo a partir del nombre
   const [slugManual, setSlugManual] = useState(Boolean(inicial));
 
+  // Aviso (no bloqueo) cuando ya existe otro producto con el mismo nombre.
+  // Guardamos para qué nombre ya avisamos, así el segundo "Publicar" pasa.
+  const [avisoNombre, setAvisoNombre] = useState('');
+  const [nombreAvisado, setNombreAvisado] = useState('');
+
   const [error, setError] = useState('');
   const [guardando, setGuardando] = useState(false);
 
+  function alCambiarFotos(lista) {
+    setFotos(lista);
+    setError(''); // si el error era "agregá una foto", ya no aplica
+  }
+
   function alCambiarNombre(valor) {
     setNombre(valor);
+    setAvisoNombre('');
     if (!slugManual) setSlug(generarSlug(valor));
   }
 
@@ -32,15 +46,31 @@ function FormularioProducto({ inicial, alGuardar, textoBoton }) {
     setSlug(generarSlug(valor));
   }
 
+  // Devuelve true si hay que frenar para que la persona revise el nombre.
+  // No avisa si está vacío, si ya avisamos por ese nombre, o si es el nombre que ya tenía.
+  async function revisarNombreRepetido() {
+    const nombreLimpio = nombre.trim();
+    if (!nombreLimpio || nombreLimpio === nombreAvisado || nombreLimpio === inicial?.nombre) return false;
+    const repetido = await existeProductoConNombre(nombreLimpio, inicial?.id).catch(() => false);
+    if (!repetido) return false;
+    setAvisoNombre(
+      `Ya hay un producto llamado "${nombreLimpio}". Si es otro, agregale un detalle al nombre (color, tela). Si está bien así, tocá ${textoBoton} de nuevo.`
+    );
+    setNombreAvisado(nombreLimpio);
+    return true;
+  }
+
   async function enviar(evento) {
     evento.preventDefault();
-    const problema = validar({ nombre, precio, talles });
+    const problema = validar({ fotos, nombre, precio, talles });
     if (problema) {
       setError(problema);
       return;
     }
-
     setError('');
+
+    if (await revisarNombreRepetido()) return;
+
     setGuardando(true);
     try {
       await alGuardar({
@@ -53,6 +83,8 @@ function FormularioProducto({ inicial, alGuardar, textoBoton }) {
           destacado,
         },
         talles,
+        fotos,
+        fotosBorradas: fotosQuitadas(inicial?.fotos ?? [], fotos),
       });
     } catch {
       setError('No pudimos guardar el producto. Revisá la conexión y probá de nuevo.');
@@ -62,16 +94,22 @@ function FormularioProducto({ inicial, alGuardar, textoBoton }) {
 
   return (
     <form onSubmit={enviar} className="formulario">
+      <div className="campo">
+        <span className="campo-etiqueta">Fotos</span>
+        <FotosAdmin fotos={fotos} alCambiar={alCambiarFotos} />
+      </div>
+
       <label className="campo">
         <span className="campo-etiqueta">Nombre</span>
         <input
           type="text"
           value={nombre}
           onChange={(e) => alCambiarNombre(e.target.value)}
+          onBlur={revisarNombreRepetido}
           className="campo-entrada"
           placeholder="Body crema"
-          autoFocus={!inicial}
         />
+        {avisoNombre && <span className="mensaje-aviso">{avisoNombre}</span>}
       </label>
 
       <label className="campo">
@@ -148,13 +186,19 @@ function FormularioProducto({ inicial, alGuardar, textoBoton }) {
 }
 
 // Devuelve el texto del problema, o '' si está todo bien.
-function validar({ nombre, precio, talles }) {
+function validar({ fotos, nombre, precio, talles }) {
+  if (fotos.length === 0) return 'Agregá al menos una foto.';
   if (!nombre.trim()) return 'Poné un nombre.';
   if (precio === '' || !Number.isInteger(Number(precio)) || Number(precio) < 0) {
     return 'El precio tiene que ser un número entero, sin decimales.';
   }
   if (talles.length === 0) return 'Elegí al menos un talle.';
   return '';
+}
+
+// Fotos que estaban guardadas y ya no están en la lista: hay que borrarlas del bucket.
+function fotosQuitadas(guardadas, actuales) {
+  return guardadas.filter((foto) => !actuales.some((actual) => actual.id === foto.id));
 }
 
 export default FormularioProducto;
