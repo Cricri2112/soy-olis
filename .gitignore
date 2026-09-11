@@ -2,9 +2,6 @@
 node_modules
 dist
 
-# Fotos originales de cámara (pesan mucho). Se convierten con `npm run fotos`.
-fotos-originales
-
 # Logs
 *.log
 

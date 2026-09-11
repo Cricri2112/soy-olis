@@ -4,6 +4,10 @@
   gap: 10px;
 }
 
+.galeria-marco {
+  position: relative;
+}
+
 .galeria-fotos {
   display: flex;
   overflow-x: auto;
@@ -15,6 +19,41 @@
   scroll-snap-align: start;
 }
 
+/* Flechas sobre la foto, discretas */
+.galeria-flecha {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(239, 234, 227, 0.85);
+  color: var(--texto);
+  font-family: var(--serif);
+  font-size: 30px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 4px;
+}
+
+.galeria-flecha:disabled {
+  opacity: 0;
+  cursor: default;
+}
+
+.galeria-flecha-izquierda {
+  left: 12px;
+}
+
+.galeria-flecha-derecha {
+  right: 12px;
+}
+
+/* Indicadores: son botones, tocarlos lleva a esa foto.
+   El área tocable es más grande que la rayita que se ve. */
 .galeria-puntos {
   display: flex;
   justify-content: center;
@@ -24,10 +63,23 @@
 
 .galeria-punto {
   width: 22px;
+  height: 14px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  position: relative;
+}
+
+.galeria-punto::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 6px;
   height: 2px;
   background: rgba(39, 39, 39, 0.2);
 }
 
-.galeria-punto-activo {
+.galeria-punto-activo::after {
   background: var(--texto);
 }
