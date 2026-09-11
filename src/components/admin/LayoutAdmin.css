@@ -1,0 +1,57 @@
+.admin {
+  min-height: 100dvh;
+  background: var(--fondo);
+}
+
+.admin-barra {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  height: 56px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--texto);
+  color: var(--fondo);
+}
+
+.admin-barra-titulo {
+  color: var(--fondo);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.admin-barra-titulo:hover {
+  color: var(--fondo);
+}
+
+.admin-barra-marca {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  margin-right: 6px;
+}
+
+.admin-barra-acciones {
+  display: flex;
+  gap: 4px;
+}
+
+.admin-barra-link {
+  background: none;
+  border: none;
+  padding: 12px;
+  min-height: 44px;
+  color: var(--fondo);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.admin-barra-link:hover {
+  color: var(--rosa-viejo);
+}
