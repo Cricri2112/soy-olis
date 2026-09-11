@@ -20,6 +20,24 @@ export async function listarProductosVisibles() {
   return data.map(normalizarProducto);
 }
 
+// Todos los productos, visibles y ocultos, para el panel.
+// Solo funciona con sesión: la política RLS del rol anon no devuelve los ocultos.
+export async function listarTodosLosProductos() {
+  const { data, error } = await supabase
+    .from('productos')
+    .select(COLUMNAS)
+    .order('creado_en', { ascending: false });
+
+  if (error) throw error;
+  return data.map(normalizarProducto);
+}
+
+// Muestra u oculta un producto en el sitio público.
+export async function cambiarVisible(id, visible) {
+  const { error } = await supabase.from('productos').update({ visible }).eq('id', id);
+  if (error) throw error;
+}
+
 // Pasa una fila de la base a la forma que usan los componentes.
 // - talles: lista de textos ordenada (XS, S, M...)
 // - fotos: lista de URLs públicas, según el campo `orden`
