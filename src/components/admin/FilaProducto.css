@@ -1,0 +1,87 @@
+.fila {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  background: #FFFFFF;
+  border: 1px solid var(--linea);
+  border-radius: 12px;
+}
+
+.fila-oculta .fila-foto,
+.fila-oculta .fila-nombre {
+  opacity: 0.5;
+}
+
+.fila-foto {
+  flex: 0 0 56px;
+}
+
+/* En la lista la foto va chica, en 3:4 */
+.fila-foto .foto-placeholder-texto {
+  display: none;
+}
+
+.fila-texto {
+  flex: 1;
+  min-width: 0;
+}
+
+.fila-nombre {
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.15;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fila-precio {
+  font-size: 13px;
+  color: var(--gris);
+  margin-top: 2px;
+}
+
+.fila-estado {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gris-claro);
+  margin-top: 4px;
+}
+
+/* --- Interruptor visible / oculto --- */
+
+.interruptor {
+  flex: 0 0 auto;
+  width: 52px;
+  height: 32px;
+  padding: 3px;
+  border: none;
+  border-radius: 999px;
+  background: var(--gris-apagado);
+  display: flex;
+  align-items: center;
+  transition: background 0.2s ease;
+}
+
+.interruptor[aria-checked='true'] {
+  background: var(--texto);
+}
+
+.interruptor:disabled {
+  opacity: 0.6;
+}
+
+.interruptor-bola {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  transition: transform 0.2s ease;
+}
+
+.interruptor[aria-checked='true'] .interruptor-bola {
+  transform: translateX(20px);
+}
