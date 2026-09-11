@@ -26,14 +26,15 @@ Hoy "Combiná con" muestra 3 productos cualquiera (`productosRelacionados` en `s
 ## Estructura del código
 
 - `src/pages/`: una vista por archivo (Home, Catalogo, Producto), cada una con su `.jsx` y su `.css`. Una página arma la vista combinando componentes; la lógica de cada pieza vive en el componente.
-- `src/pages/admin/`: vistas del panel (Login, Productos, ...). `admin.css` tiene los estilos compartidos del panel: campos y botones de 52 px de alto, letra de 16 px para que iOS no haga zoom.
+- `src/pages/admin/`: vistas del panel (Login, Productos, EditarProducto para `/admin/nuevo` y `/admin/:id`). `admin.css` tiene los estilos compartidos del panel: campos y botones de 52 px de alto, letra de 16 px para que iOS no haga zoom.
 - `src/components/`: piezas reutilizables, cada una con su `.jsx` y su `.css` al lado (Header, ProductoCard, FotoPrenda, Galeria, SelectorTalles, DatosProducto, Relacionados, BotonWhatsApp, FiltrosCategoria, ScrollArriba). `LayoutPublico` envuelve el sitio con el header de la marca; `RutaProtegida` redirige al login si no hay sesión.
-- `src/components/admin/`: piezas del panel (`LayoutAdmin` con la barra superior y el botón Salir, `FilaProducto` con el interruptor visible/oculto).
+- `src/components/admin/`: piezas del panel (`LayoutAdmin` con la barra superior y el botón Salir, `FilaProducto` con el interruptor visible/oculto, `FormularioProducto` con lo obligatorio arriba y lo opcional plegado, `SelectorTallesAdmin` con chips y campo "otro").
+- Slug: se genera solo desde el nombre (`utils/slug.js`) y, antes de guardar, `slugDisponible` en `productosApi.js` le agrega `-2`, `-3`... si ya existe. Los talles se guardan borrando los anteriores e insertando la lista nueva.
 - Rutas: públicas bajo `LayoutPublico`; `/admin/login` libre; todo lo demás bajo `/admin` cuelga de `RutaProtegida` y `LayoutAdmin` (ver `App.jsx`).
 - `src/lib/supabase.js`: el único cliente de Supabase. Todo acceso a la base pasa por acá.
 - `src/data/`: acceso a datos, sin React. `productosApi.js` y `fotosApi.js` consultan Supabase y devuelven productos "normalizados" (talles ordenados, fotos como URLs). `authApi.js` envuelve Supabase Auth. `contacto.js` tiene los textos fijos de la tienda.
 - `src/hooks/`: hooks que cargan datos y exponen `cargando` / `error` (`useCatalogo`, `useSesion`, `useProductosAdmin`). Después de guardar un cambio, el panel actualiza la lista en memoria con `setProductos` en vez de volver a consultar.
-- `src/utils/`: funciones puras y chicas (`precio.js`, `whatsapp.js`, `catalogo.js`).
+- `src/utils/`: funciones puras y chicas (`precio.js`, `whatsapp.js`, `catalogo.js`, `slug.js`).
 - `public/productos/`: fotos de las prendas en `.webp`, generadas con `npm run fotos` desde `fotos-originales/` (carpeta ignorada por git). `public/logo.svg`: logo de la marca. `public/hero.webp`: foto de portada de la Home (1600 px de ancho).
 - `scripts/`: herramientas de desarrollo que se corren con `npm run`. No forman parte de la web.
 - `design/`: handoff de Claude Design (fuente de verdad de la UI). No es código de la app: no se importa desde `src/` y está excluido del lint. Ver `design/README.md`.

@@ -8,6 +8,7 @@ import Catalogo from './pages/Catalogo.jsx';
 import Producto from './pages/Producto.jsx';
 import Login from './pages/admin/Login.jsx';
 import Productos from './pages/admin/Productos.jsx';
+import EditarProducto from './pages/admin/EditarProducto.jsx';
 
 function App() {
   return (
@@ -26,6 +27,8 @@ function App() {
         <Route path="/admin" element={<RutaProtegida />}>
           <Route element={<LayoutAdmin />}>
             <Route index element={<Productos />} />
+            <Route path="nuevo" element={<EditarProducto />} />
+            <Route path=":id" element={<EditarProducto />} />
           </Route>
         </Route>
       </Routes>

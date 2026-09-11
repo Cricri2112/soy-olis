@@ -1,0 +1,59 @@
+import { useEffect, useState } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import FormularioProducto from '../../components/admin/FormularioProducto.jsx';
+import MensajeEstado from '../../components/MensajeEstado.jsx';
+import {
+  obtenerProducto,
+  crearProducto,
+  actualizarProducto,
+  slugDisponible,
+} from '../../data/productosApi.js';
+import './EditarProducto.css';
+
+// Alta (/admin/nuevo) y edición (/admin/:id) de un producto.
+function EditarProducto() {
+  const { id } = useParams();
+  const navegar = useNavigate();
+  const esNuevo = !id;
+
+  const [producto, setProducto] = useState(null);
+  const [cargando, setCargando] = useState(!esNuevo);
+  const [error, setError] = useState(null);
+
+  // En edición, cargamos el producto antes de mostrar el formulario
+  useEffect(() => {
+    if (esNuevo) return;
+    obtenerProducto(id)
+      .then(setProducto)
+      .catch(setError)
+      .finally(() => setCargando(false));
+  }, [id, esNuevo]);
+
+  async function guardar({ datos, talles }) {
+    // Si el slug ya está usado por otro producto, le agrega un número
+    const datosConSlug = { ...datos, slug: await slugDisponible(datos.slug, id) };
+
+    if (esNuevo) await crearProducto(datosConSlug, talles);
+    else await actualizarProducto(id, datosConSlug, talles);
+
+    navegar('/admin');
+  }
+
+  if (cargando || error) return <MensajeEstado cargando={cargando} error={error} />;
+  if (!esNuevo && !producto) return <MensajeEstado vacio textoVacio="No encontramos ese producto." />;
+
+  return (
+    <main className="admin-contenido">
+      <Link to="/admin" className="editar-volver">← Productos</Link>
+      <h1 className="admin-titulo">{esNuevo ? 'Nuevo producto' : producto.nombre}</h1>
+
+      <FormularioProducto
+        inicial={producto ?? undefined}
+        alGuardar={guardar}
+        textoBoton={esNuevo ? 'Publicar' : 'Guardar cambios'}
+      />
+    </main>
+  );
+}
+
+export default EditarProducto;
