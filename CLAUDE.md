@@ -1,20 +1,25 @@
 # soy Olis — Web de catálogo
 
-Web de una marca uruguaya de moda femenina (básicos elevados, prendas versátiles y combinables), emprendimiento en etapa inicial. Este repo contiene la **versión 1**: una web de catálogo estática.
+Web de una marca uruguaya de moda femenina (básicos elevados, prendas versátiles y combinables), emprendimiento en etapa inicial. La usuaria principal (Camila) administra todo desde el celular.
 
-## Alcance de la versión 1 (cerrado)
+## Etapa 1 (en curso): catálogo dinámico + panel admin
 
-- Web **estática**, sin backend: los productos van hardcodeados en `src/data/productos.js`, pensado para reemplazarse fácil por Supabase más adelante.
-- Tres vistas:
-  1. **Home**: identidad de marca y acceso al catálogo.
-  2. **Catálogo**: grilla de productos con foto, nombre y precio.
-  3. **Detalle de producto**: fotos, nombre, precio, talles disponibles y botón destacado "Consultar por WhatsApp" (link `wa.me` prearmado con el nombre del producto).
-- **Fuera de alcance** (no implementar aunque parezca útil): carrito, pagos online, login, panel de administración, reportes, integración con Supabase.
+- El catálogo se lee desde **Supabase** (tablas `productos`, `producto_talles`, `fotos`; bucket `productos`). La v1 estática (`src/data/productos.js`) ya no existe.
+- Vistas públicas: **Home** (identidad + "Lo esencial" con los destacados), **Catálogo** (grilla, filtros por categoría solo si hay más de una) y **Detalle** (`/producto/:slug`: fotos, nombre, precio, talles, "Combiná con" y botón "Consultar por WhatsApp").
+- Panel admin bajo `/admin`, en la misma app: login con email + contraseña de Supabase Auth, lista con toggle visible/oculto, alta/edición (fotos, nombre, precio, talles obligatorios; descripción, categoría y destacado opcionales), fotos desde el celular, eliminar.
+- **Fuera de alcance**: carrito, pagos, stock (Etapa 2, columna `stock` en `producto_talles`), roles, reportes, registro público de usuarios, recuperación de contraseña.
+- **No tocar el esquema de la base ni las políticas RLS** sin consultar. Si el modelo bloquea algo, frenar y preguntar.
+- "Nuevo" en el catálogo = creado hace menos de 30 días. "Lo esencial" = `destacado = true`, o los 4 más recientes si no hay ninguno.
+
+## Etapa futura: relaciones entre productos
+
+Hoy "Combiná con" muestra 3 productos cualquiera (`productosRelacionados` en `src/utils/catalogo.js`). La idea para más adelante es relacionar prendas de verdad: una tabla `producto_relacionados (producto_id, relacionado_id)` cargada desde el admin (por ejemplo, "este body combina con este pantalón y este blazer"), y que el detalle muestre esas. Cuando se haga, solo cambia esa función y el admin.
 
 ## Stack
 
 - React + Vite, en **JavaScript** (no TypeScript).
-- `react-router-dom` para las rutas (`/`, `/catalogo`, `/producto/:id`). Es la única librería extra aprobada.
+- `react-router-dom` para las rutas y `@supabase/supabase-js` para datos, auth y storage. Son las únicas librerías extra aprobadas. La compresión de fotos se hace con `<canvas>` del navegador, sin librería.
+- Variables de entorno (ver `.env.example`): `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`, `VITE_WHATSAPP_NUMBER`. Local en `.env.local` (ignorado por git), en producción en Vercel.
 - Deploy en Vercel (capa gratuita). El proyecto Vite vive en la raíz del repo; `vercel.json` redirige todas las rutas a `index.html` para que el router funcione al recargar.
 - Sin otras librerías adicionales salvo necesidad clara y justificada. Preferir CSS simple (CSS modules o archivo global) antes que frameworks de estilos, salvo que el handoff de diseño indique otra cosa.
 
@@ -22,8 +27,10 @@ Web de una marca uruguaya de moda femenina (básicos elevados, prendas versátil
 
 - `src/pages/`: una vista por archivo (Home, Catalogo, Producto), cada una con su `.jsx` y su `.css`. Una página arma la vista combinando componentes; la lógica de cada pieza vive en el componente.
 - `src/components/`: piezas reutilizables, cada una con su `.jsx` y su `.css` al lado (Header, ProductoCard, FotoPrenda, Galeria, SelectorTalles, DatosProducto, Relacionados, BotonWhatsApp, FiltrosCategoria, ScrollArriba).
-- `src/data/`: solo datos, sin lógica de UI. `productos.js` (catálogo, categorías y funciones para consultarlo) y `contacto.js` (WhatsApp, Instagram y textos fijos de la tienda).
-- `src/utils/`: funciones puras y chicas (`precio.js`, `whatsapp.js`).
+- `src/lib/supabase.js`: el único cliente de Supabase. Todo acceso a la base pasa por acá.
+- `src/data/`: acceso a datos, sin React. `productosApi.js` y `fotosApi.js` consultan Supabase y devuelven productos "normalizados" (talles ordenados, fotos como URLs). `contacto.js` tiene los textos fijos de la tienda.
+- `src/hooks/`: hooks que cargan datos y exponen `cargando` / `error` (`useCatalogo`).
+- `src/utils/`: funciones puras y chicas (`precio.js`, `whatsapp.js`, `catalogo.js`).
 - `public/productos/`: fotos de las prendas en `.webp`, generadas con `npm run fotos` desde `fotos-originales/` (carpeta ignorada por git). `public/logo.svg`: logo de la marca. `public/hero.webp`: foto de portada de la Home (1600 px de ancho).
 - `scripts/`: herramientas de desarrollo que se corren con `npm run`. No forman parte de la web.
 - `design/`: handoff de Claude Design (fuente de verdad de la UI). No es código de la app: no se importa desde `src/` y está excluido del lint. Ver `design/README.md`.
