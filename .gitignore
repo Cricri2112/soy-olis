@@ -15,3 +15,7 @@ fotos-originales
 .DS_Store
 *.local
 .vercel
+
+# Variables de entorno locales (nunca se suben)
+.env.local
+.env*.local

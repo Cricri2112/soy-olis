@@ -1,11 +1,16 @@
 import { Link } from 'react-router-dom';
 import ProductoCard from '../components/ProductoCard.jsx';
-import { productosDestacados } from '../data/productos.js';
+import MensajeEstado from '../components/MensajeEstado.jsx';
+import { useCatalogo } from '../hooks/useCatalogo.js';
+import { productosDestacados } from '../utils/catalogo.js';
 import { INSTAGRAM_USUARIO, INSTAGRAM_URL, UBICACION } from '../data/contacto.js';
 import { linkWhatsApp } from '../utils/whatsapp.js';
 import './Home.css';
 
 function Home() {
+  const { productos, cargando, error } = useCatalogo();
+  const destacados = productosDestacados(productos);
+
   return (
     <main className="home">
       {/* Portada con foto a pantalla completa */}
@@ -51,8 +56,9 @@ function Home() {
           <h2 className="esencial-titulo">Lo esencial</h2>
           <Link to="/catalogo" className="esencial-ver-todo">Ver todo</Link>
         </div>
+        <MensajeEstado cargando={cargando} error={error} vacio={destacados.length === 0} />
         <div className="esencial-grilla">
-          {productosDestacados().map((producto) => (
+          {destacados.map((producto) => (
             <ProductoCard key={producto.id} producto={producto} />
           ))}
         </div>

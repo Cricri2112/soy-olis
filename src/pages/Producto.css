@@ -54,10 +54,3 @@
   color: var(--texto-suave);
 }
 
-.info-sin-stock {
-  font-size: 13px;
-  line-height: 1.6;
-  color: var(--gris);
-  padding: 14px 16px;
-  border: 1px solid var(--linea);
-}

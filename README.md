@@ -2,14 +2,17 @@
 
 Web de catálogo de **soy Olis**, marca uruguaya de moda femenina.
 
-Versión 1: catálogo estático (sin backend). Los productos están en `src/data/productos.js`.
+Los productos viven en Supabase y se leen desde la web. El panel de administración está en `/admin`.
 
 ## Correr el proyecto
 
 ```bash
 npm install
+cp .env.example .env.local   # y completar los valores
 npm run dev
 ```
+
+Las tres variables de `.env.example` son obligatorias. Sin ellas la app no arranca (muestra un error claro en consola).
 
 Otros comandos:
 
