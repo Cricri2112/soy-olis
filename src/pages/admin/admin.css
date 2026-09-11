@@ -1,0 +1,85 @@
+/* Estilos compartidos por todas las pantallas del panel: formularios y botones.
+   Pensados para el pulgar: campos y botones de 52px de alto, letra de 16px
+   (con menos, iOS hace zoom al tocar un campo). */
+
+.admin-contenido {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+.admin-titulo {
+  font-size: 32px;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+
+.campo-etiqueta {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--gris-claro);
+}
+
+.campo-entrada {
+  width: 100%;
+  height: 52px;
+  padding: 0 16px;
+  border: 1px solid rgba(39, 39, 39, 0.25);
+  border-radius: 10px;
+  background: #FFFFFF;
+  font: inherit;
+  font-size: 16px;
+  color: var(--texto);
+}
+
+.campo-entrada:focus {
+  outline: none;
+  border-color: var(--texto);
+}
+
+.boton-principal {
+  width: 100%;
+  height: 52px;
+  border: none;
+  border-radius: 999px;
+  background: var(--texto);
+  color: var(--fondo);
+  font-size: 13px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.boton-principal:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.mensaje-error {
+  margin: 0 0 16px;
+  padding: 12px 16px;
+  border: 1px solid var(--rosa-viejo);
+  border-radius: 10px;
+  font-size: 14px;
+  color: var(--texto-hover);
+}
+
+.mensaje-aviso {
+  display: block;
+  margin-top: 4px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: rgba(201, 163, 160, 0.25);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--texto);
+}

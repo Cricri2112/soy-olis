@@ -10,7 +10,7 @@ function ProductoCard({ producto, conEtiquetas = false }) {
   return (
     <Link to={`/producto/${producto.slug}`} className="card">
       <div className="card-foto">
-        <FotoPrenda foto={producto.fotos[0]} etiqueta={producto.nombre} zoomAlPasar />
+        <FotoPrenda foto={producto.fotos[0]?.url} etiqueta={producto.nombre} zoomAlPasar />
         {conEtiquetas && esNuevo(producto) && <span className="card-etiqueta">Nuevo</span>}
       </div>
       <div className="card-texto">

@@ -1,0 +1,68 @@
+.formulario {
+  display: flex;
+  flex-direction: column;
+}
+
+.campo-area {
+  height: auto;
+  padding: 12px 16px;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+.campo-fila {
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  font-size: 15px;
+}
+
+.campo-casilla {
+  width: 22px;
+  height: 22px;
+  accent-color: var(--texto);
+}
+
+.campo-ayuda {
+  font-size: 12px;
+  color: var(--gris-claro);
+  overflow-wrap: anywhere; /* corta un slug muy largo, pero las frases normales cortan por espacio */
+}
+
+/* Sección plegable con lo opcional */
+.formulario-opcionales {
+  margin: 4px 0 24px;
+  border-top: 1px solid var(--linea);
+  border-bottom: 1px solid var(--linea);
+}
+
+.formulario-opcionales-titulo {
+  padding: 16px 0;
+  cursor: pointer;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gris);
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+.formulario-opcionales-titulo::-webkit-details-marker {
+  display: none;
+}
+
+.formulario-opcionales-titulo::after {
+  content: '+';
+  font-size: 18px;
+  line-height: 1;
+}
+
+.formulario-opcionales[open] .formulario-opcionales-titulo::after {
+  content: '−';
+}
+
+.formulario-opcionales[open] .formulario-opcionales-titulo {
+  padding-bottom: 20px;
+}

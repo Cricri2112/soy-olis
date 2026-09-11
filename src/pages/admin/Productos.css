@@ -1,0 +1,40 @@
+.productos-encabezado {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.productos-encabezado .admin-titulo {
+  margin-bottom: 0;
+}
+
+.productos-nuevo {
+  display: inline-flex;
+  align-items: center;
+  height: 44px;
+  padding: 0 20px;
+  border-radius: 999px;
+  background: var(--texto);
+  color: var(--fondo);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.productos-nuevo:hover {
+  background: var(--texto-hover);
+  color: var(--fondo);
+}
+
+.productos-lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

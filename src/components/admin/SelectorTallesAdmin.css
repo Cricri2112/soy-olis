@@ -1,0 +1,38 @@
+.talles-admin {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.talles-admin-lista {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  min-width: 52px;
+  height: 44px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(39, 39, 39, 0.35);
+  background: transparent;
+  color: var(--texto);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.chip-activo {
+  background: var(--texto);
+  border-color: var(--texto);
+  color: var(--fondo);
+}
+
+.talles-admin-otro {
+  display: flex;
+  gap: 8px;
+}
+
+.talles-admin-otro .campo-entrada {
+  height: 44px;
+}

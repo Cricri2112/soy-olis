@@ -12,7 +12,7 @@ function Relacionados({ productos }) {
       <div className="combina-grilla">
         {productos.map((producto) => (
           <Link key={producto.id} to={`/producto/${producto.slug}`} className="combina-card">
-            <FotoPrenda foto={producto.fotos[0]} etiqueta={producto.nombre} />
+            <FotoPrenda foto={producto.fotos[0]?.url} etiqueta={producto.nombre} />
             <div className="combina-nombre">{producto.nombre}</div>
           </Link>
         ))}
