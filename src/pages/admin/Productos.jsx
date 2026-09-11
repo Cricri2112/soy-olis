@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import FilaProducto from '../../components/admin/FilaProducto.jsx';
 import MensajeEstado from '../../components/MensajeEstado.jsx';
 import { useProductosAdmin } from '../../hooks/useProductosAdmin.js';
@@ -24,7 +25,10 @@ function Productos() {
 
   return (
     <main className="admin-contenido">
-      <h1 className="admin-titulo">Productos</h1>
+      <div className="productos-encabezado">
+        <h1 className="admin-titulo">Productos</h1>
+        <Link to="/admin/nuevo" className="productos-nuevo">+ Nuevo</Link>
+      </div>
 
       {errorGuardado && <p className="mensaje-error">{errorGuardado}</p>}
 

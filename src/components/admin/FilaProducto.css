@@ -25,6 +25,11 @@
 .fila-texto {
   flex: 1;
   min-width: 0;
+  color: var(--texto);
+}
+
+.fila-texto:hover {
+  color: var(--texto);
 }
 
 .fila-nombre {

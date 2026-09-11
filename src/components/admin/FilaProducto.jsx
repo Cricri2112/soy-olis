@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import FotoPrenda from '../FotoPrenda.jsx';
 import { formatearPrecio } from '../../utils/precio.js';
 import './FilaProducto.css';
@@ -16,15 +17,16 @@ function FilaProducto({ producto, alAlternarVisible }) {
 
   return (
     <li className={producto.visible ? 'fila' : 'fila fila-oculta'}>
-      <div className="fila-foto">
+      {/* Tocar la foto o el texto abre la edición */}
+      <Link to={`/admin/${producto.id}`} className="fila-foto">
         <FotoPrenda foto={producto.fotos[0]} etiqueta={producto.nombre} />
-      </div>
+      </Link>
 
-      <div className="fila-texto">
+      <Link to={`/admin/${producto.id}`} className="fila-texto">
         <div className="fila-nombre">{producto.nombre}</div>
         <div className="fila-precio">{formatearPrecio(producto.precio)}</div>
         <div className="fila-estado">{producto.visible ? 'Visible en el sitio' : 'Oculto'}</div>
-      </div>
+      </Link>
 
       <button
         type="button"
