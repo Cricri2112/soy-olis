@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import FormularioProducto from '../../components/admin/FormularioProducto.jsx';
+import EliminarProducto from '../../components/admin/EliminarProducto.jsx';
 import MensajeEstado from '../../components/MensajeEstado.jsx';
 import {
   obtenerProducto,
   crearProducto,
   actualizarProducto,
+  eliminarProducto,
   slugDisponible,
 } from '../../data/productosApi.js';
 import { sincronizarFotos } from '../../data/fotosApi.js';
@@ -43,6 +45,11 @@ function EditarProducto() {
     navegar('/admin');
   }
 
+  async function eliminar() {
+    await eliminarProducto(id);
+    navegar('/admin');
+  }
+
   if (cargando || error) return <MensajeEstado cargando={cargando} error={error} />;
   if (!esNuevo && !producto) return <MensajeEstado vacio textoVacio="No encontramos ese producto." />;
 
@@ -56,6 +63,8 @@ function EditarProducto() {
         alGuardar={guardar}
         textoBoton={esNuevo ? 'Publicar' : 'Guardar cambios'}
       />
+
+      {!esNuevo && <EliminarProducto nombre={producto.nombre} alConfirmar={eliminar} />}
     </main>
   );
 }

@@ -1,5 +1,5 @@
 import { supabase } from '../lib/supabase.js';
-import { urlPublica } from './fotosApi.js';
+import { urlPublica, borrarArchivosDelProducto } from './fotosApi.js';
 import { ordenarTalles } from '../utils/catalogo.js';
 
 // Consultas a la tabla `productos` (con sus talles y fotos).
@@ -59,6 +59,14 @@ export async function actualizarProducto(id, datos, talles) {
   const { error } = await supabase.from('productos').update(datos).eq('id', id);
   if (error) throw error;
   await reemplazarTalles(id, talles);
+}
+
+// Elimina el producto. Primero los archivos del bucket; después la fila,
+// que arrastra talles y fotos por el "on delete cascade" de la base.
+export async function eliminarProducto(id) {
+  await borrarArchivosDelProducto(id);
+  const { error } = await supabase.from('productos').delete().eq('id', id);
+  if (error) throw error;
 }
 
 // Borra los talles que tenía el producto y guarda la lista nueva.
