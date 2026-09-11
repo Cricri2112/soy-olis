@@ -8,6 +8,7 @@ import {
   actualizarProducto,
   slugDisponible,
 } from '../../data/productosApi.js';
+import { sincronizarFotos } from '../../data/fotosApi.js';
 import './EditarProducto.css';
 
 // Alta (/admin/nuevo) y edición (/admin/:id) de un producto.
@@ -29,13 +30,16 @@ function EditarProducto() {
       .finally(() => setCargando(false));
   }, [id, esNuevo]);
 
-  async function guardar({ datos, talles }) {
+  async function guardar({ datos, talles, fotos, fotosBorradas }) {
     // Si el slug ya está usado por otro producto, le agrega un número
     const datosConSlug = { ...datos, slug: await slugDisponible(datos.slug, id) };
 
-    if (esNuevo) await crearProducto(datosConSlug, talles);
+    // Primero el producto (las fotos necesitan su id para la carpeta del bucket)
+    let productoId = id;
+    if (esNuevo) productoId = await crearProducto(datosConSlug, talles);
     else await actualizarProducto(id, datosConSlug, talles);
 
+    await sincronizarFotos(productoId, fotos, fotosBorradas);
     navegar('/admin');
   }
 
