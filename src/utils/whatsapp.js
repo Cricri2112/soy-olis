@@ -10,12 +10,6 @@ export function linkWhatsApp(mensaje) {
 
 // Mensaje para consultar por una prenda. Incluye el talle si la clienta eligió uno.
 export function mensajeConsulta(producto, talle) {
-  const nombreYPrecio = `${producto.nombre} (${formatearPrecio(producto.precio)})`;
-
-  if (!producto.disponible) {
-    return `Hola Olis! Me interesa ${nombreYPrecio}. ¿Cuándo vuelve a estar disponible?`;
-  }
-
   const detalleTalle = talle ? ` en talle ${talle}` : '';
   return `Hola Olis! Quiero consultar por ${producto.nombre}${detalleTalle} (${formatearPrecio(producto.precio)}).`;
 }

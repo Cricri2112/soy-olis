@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import FotoPrenda from './FotoPrenda.jsx';
 import './Relacionados.css';
 
-// Sección "Combiná con": hasta 3 prendas de otras categorías.
+// Sección "Combiná con": hasta 3 prendas relacionadas.
 function Relacionados({ productos }) {
   if (productos.length === 0) return null;
 
@@ -11,12 +11,8 @@ function Relacionados({ productos }) {
       <h2 className="combina-titulo">Combiná con</h2>
       <div className="combina-grilla">
         {productos.map((producto) => (
-          <Link key={producto.id} to={`/producto/${producto.id}`} className="combina-card">
-            <FotoPrenda
-              foto={producto.fotos[0]}
-              posicion={producto.posicionFoto}
-              etiqueta={producto.nombre}
-            />
+          <Link key={producto.id} to={`/producto/${producto.slug}`} className="combina-card">
+            <FotoPrenda foto={producto.fotos[0]} etiqueta={producto.nombre} />
             <div className="combina-nombre">{producto.nombre}</div>
           </Link>
         ))}

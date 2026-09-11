@@ -34,13 +34,6 @@
   font-weight: 500;
 }
 
-.talle-agotado {
-  border-color: var(--linea);
-  color: var(--gris-apagado);
-  text-decoration: line-through;
-  cursor: default;
-}
-
 .talle-elegido {
   background: var(--texto);
   border-color: var(--texto);

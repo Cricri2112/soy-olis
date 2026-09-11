@@ -4,7 +4,7 @@ import './Galeria.css';
 
 // Galería de fotos del detalle: se desliza de costado y muestra
 // un indicador con la foto actual. Si no hay fotos, muestra un placeholder.
-function Galeria({ fotos, posicion, nombre }) {
+function Galeria({ fotos, nombre }) {
   const [fotoActual, setFotoActual] = useState(0);
 
   const fotosAMostrar = fotos.length > 0 ? fotos : [undefined];
@@ -20,12 +20,7 @@ function Galeria({ fotos, posicion, nombre }) {
       <div className="galeria-fotos" onScroll={alDeslizar}>
         {fotosAMostrar.map((foto, indice) => (
           <div key={indice} className="galeria-foto">
-            <FotoPrenda
-              foto={foto}
-              posicion={posicion}
-              etiqueta={nombre}
-              cargaInmediata={indice === 0}
-            />
+            <FotoPrenda foto={foto} etiqueta={nombre} cargaInmediata={indice === 0} />
           </div>
         ))}
       </div>
